@@ -28,13 +28,13 @@ const createPDF = async () => {
 
   // const content = '<h1>Welcome to puppeteer-html-pdf</h1>';
   // const content = 'https://www.google.com'; 
-  const content  = await readFile(__dirname + '/sample.html','utf8'); 
+  const content = await readFile(__dirname + '/sample.html','utf8'); 
     
   try {
     const buffer = await htmlPDF.create(content, options); 
-    await writeFile('sample.pdf', buffer)
+    await writeFile('sample.pdf', buffer);
   } catch (error) {
-    console.log('htmlPDF error', error)
+    console.log('htmlPDF error', error);
   }
 }
 
