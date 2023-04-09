@@ -146,3 +146,17 @@ The sizes of each format are as follows:
 | left     | <code>optional</code> | string \| number |
 | right    | <code>optional</code> | string \| number |
 | top      | <code>optional</code> | string \| number |
+
+### Linux Troubleshooting
+Install chromium
+```sh
+sudo apt update
+```
+```sh
+sudo apt install chromium
+```
+After chromium installation, if you still get missing dependencies issue. Install below dependencies.
+```sh
+sudo apt install ca-certificates fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
+```
+https://pptr.dev/troubleshooting#chrome-headless-doesnt-launch-on-unix
