@@ -152,7 +152,7 @@ The sizes of each format are as follows:
 | top      | <code>optional</code> | string \| number |
 
 ### Linux Troubleshooting
-Install chromium
+Install chromium 
 ```sh
 sudo apt update
 ```
