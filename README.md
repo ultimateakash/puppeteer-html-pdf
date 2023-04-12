@@ -45,11 +45,12 @@ const options = {
   format: 'A4'
 } 
 
-const html = await readFile(__dirname + '/sample.html','utf8');  
-const template = hbs.compile(html);
-const content = template(pdfData);
 
 try {
+  const html = await readFile(__dirname + '/sample.html','utf8');  
+  const template = hbs.compile(html);
+  const content = template(pdfData);
+
   const buffer = await htmlPDF.create(content, options);
   await writeFile('sample.pdf', buffer);
 } catch (error) {
