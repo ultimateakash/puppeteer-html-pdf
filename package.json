@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-html-pdf",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "HTML to PDF converter for Node.js",
   "main": "lib/index.js",
   "directories": {
