@@ -20,11 +20,12 @@ htmlPDF.create(content, options, callback)
 ```js
 const fs = require('fs');
 const util = require('util');
+const hbs = require('handlebars');
 const htmlPDF = require('puppeteer-html-pdf');
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
-const pdfContext = {
+const pdfData = {
   invoiceItems: [
     { item: 'Website Design', amount: 5000 },
     { item: 'Hosting (3 months)', amount: 2000 },
@@ -41,10 +42,12 @@ const pdfContext = {
 }
 
 const options = {
-  format: 'A4',
-  context: pdfContext,
+  format: 'A4'
 } 
-const content = await readFile(__dirname + '/sample.html','utf8'); 
+
+const html = await readFile(__dirname + '/sample.html','utf8');  
+const template = hbs.compile(html);
+const content = template(pdfData);
 
 try {
   const buffer = await htmlPDF.create(content, options);
@@ -63,7 +66,7 @@ const options = {
   path: `${__dirname}/sample.pdf` 
 }
 
-const content = '<h1>Welcome to puppeteer-html-pdf</h1>'; 
+const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
 
 try {
   await htmlPDF.create(content, options); 
@@ -95,12 +98,12 @@ try {
 | Property            | Modifiers             | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                                     | Default                                                                  |
 | ------------------- | --------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | displayHeaderFooter | `optional` | boolean                                   | Whether to show the header and footer.                                                                                                                                                                                                                                                                                                                                          | `false`                                                       |
-| footerTemplate      | `optional` | string                                    | HTML template for the print footer. Has the same constraints and support for special classes as [PDFOptions.headerTemplate](./puppeteer.pdfoptions.md).                                                                                                                                                                                                                         |                                                                          |
-| format              | `optional` | [PaperFormat](./puppeteer.paperformat.md) |                                                                                                                                                                                                                                                                                                                                                                                 | `letter`.                                                     |
+| footerTemplate      | `optional` | string                                    | HTML template for the print footer. Has the same constraints and support for special classes as PDFOptions.headerTemplate.                                                                                                                                                                                                                         |                                                                          |
+| format              | `optional` | PaperFormat                               |                                                                                                                                                                                                                                                                                                                                                                                 | `letter`.                                                     |
 | headerTemplate      | `optional` | string                                    | <p>HTML template for the print header. Should be valid HTML with the following classes used to inject values into them:</p><p>- `date` formatted print date</p><p>- `title` document title</p><p>- `url` document location</p><p>- `pageNumber` current page number</p><p>- `totalPages` total pages in the document</p> |                                                                          |
 | height              | `optional` | string \| number                          | Sets the height of paper. You can pass in a number or a string with a unit.                                                                                                                                                                                                                                                                                                     |                                                                          |
 | landscape           | `optional` | boolean                                   | Whether to print in landscape orientation.                                                                                                                                                                                                                                                                                                                                      | `false`                                                       |
-| margin              | `optional` | [PDFMargin](./puppeteer.pdfmargin.md)     | Set the PDF margins.                                                                                                                                                                                                                                                                                                                                                            | `undefined` no margins are set.                               |
+| margin              | `optional` | PDFMargin                                 | Set the PDF margins.                                                                                                                                                                                                                                                                                                                                                            | `undefined` no margins are set.                               |
 | omitBackground      | `optional` | boolean                                   | Hides default white background and allows generating pdfs with transparency.                                                                                                                                                                                                                                                                                                    | `false`                                                       |
 | pageRanges          | `optional` | string                                    | Paper ranges to print, e.g. `1-5, 8, 11-13`.                                                                                                                                                                                                                                                                                                                         | The empty string, which means all pages are printed.                     |
 | path                | `optional` | string                                    | The path to save the file to.                                                                                                                                                                                                                                                                                                                                                   | `undefined`, which means the PDF will not be written to disk. |
