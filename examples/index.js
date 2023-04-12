@@ -1,11 +1,12 @@
 const fs = require('fs');
 const util = require('util');
+const hbs = require('handlebars');
 const htmlPDF = require('../lib');
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
 const createPDF = async () => {
-  const pdfContext =  {
+  const pdfData =  {
     invoiceItems: [
       { item: 'Website Design', amount: 5000 },
       { item: 'Hosting (3 months)', amount: 2000 },
@@ -22,13 +23,14 @@ const createPDF = async () => {
   }
 
   const options = {
-    format: 'A4',
-    context: pdfContext
+    format: 'A4'
   }
 
-  // const content = '<h1>Welcome to puppeteer-html-pdf</h1>';
+  // const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
   // const content = 'https://www.google.com'; 
-  const content = await readFile(__dirname + '/sample.html','utf8'); 
+  const html = await readFile(__dirname + '/sample.html','utf8');  
+  const template = hbs.compile(html);
+  const content = template(pdfData);
     
   try {
     const buffer = await htmlPDF.create(content, options); 
