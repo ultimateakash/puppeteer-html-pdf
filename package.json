@@ -20,7 +20,15 @@
     "nodejs",
     "puppeteer",
     "htmlPDF",
-    "htmltopdf"
+    "htmltopdf",
+    "puppeteer-html-pdf",
+    "puppeteer-pdf",
+    "puppeteerpdf",
+    "pdf-puppeteer",
+    "pdfpuppeteer",
+    "puppeteer-node.js",
+    "puppeteer-node",
+    "node-puppeteer"
   ],
   "author": "UltimateAkash",
   "license": "ISC",
