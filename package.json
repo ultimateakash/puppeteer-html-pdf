@@ -21,6 +21,9 @@
     "puppeteer",
     "htmlPDF",
     "htmltopdf",
+    "html-pdf",
+    "node-html-pdf",
+    "html-pdf-node",
     "puppeteer-html-pdf",
     "puppeteer-pdf",
     "puppeteerpdf",
@@ -40,6 +43,6 @@
     "is-url": "^1.2.4",
     "lodash.has": "^4.5.2",
     "lodash.omit": "^4.5.0",
-    "puppeteer": "^19.8.5"
+    "puppeteer": "^19.11.1"
   }
 }

@@ -63,7 +63,7 @@ const htmlPDF = require('puppeteer-html-pdf');
  
 const options = { 
   format: 'A4',
-  path: `${__dirname}/sample.pdf` 
+  path: `${__dirname}/sample.pdf` // you can pass path to save the file
 }
 
 const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
@@ -79,9 +79,15 @@ try {
 ```js 
 const htmlPDF = require('puppeteer-html-pdf'); 
  
-const options = { 
-  format: 'A4',
-  path: `${__dirname}/sample.pdf` 
+const options = {  
+  width: '219mm',
+  height: '297mm', 
+  margin: {
+    left: '25px',
+    right: '25px',
+    top: '20px'
+  },
+  path: `${__dirname}/sample.pdf` // you can pass path to save the file
 }
 
 const content = 'https://www.google.com';
@@ -112,7 +118,7 @@ try {
 | scale               | `optional` | number                                    | Scales the rendering of the web page. Amount must be between `0.1` and `2`.                                                                                                                                                                                                                                                                               | `1`                                                           |
 | timeout             | `optional` | number                                    | Timeout in milliseconds. Pass `0` to disable timeout.                                                                                                                                                                                                                                                                                                                | `30_000`                                                      |
 | width               | `optional` | string \| number                          | Sets the width of paper. You can pass in a number or a string with a unit.                                                                                                                                                                                                                                                                                                      |                                                                          |
-| headless               | `optional` | boolean                          | Sets Chromium launch mode.                                                                                                                                                                                                                                                                                                      |                                                                    `true`      |
+| headless               | `optional` | boolean | string                          | Sets Chromium launch mode.                                                                                                                                                                                                                                                                                                      |                                                                    `new`      |
 | args               | `optional` | array                          | Sets Chromium flags mode.                                                                                                                                                                                                                                                                                                      |                                                                    `['--no-sandbox', '--disable-setuid-sandbox']`      |
 ### Format
 
