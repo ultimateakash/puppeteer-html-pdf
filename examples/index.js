@@ -23,7 +23,10 @@ const createPDF = async () => {
   }
 
   const options = {
-    format: 'A4'
+    format: 'A4',
+    args: {
+      browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
+    }
   }
 
   // const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
