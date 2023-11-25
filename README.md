@@ -10,22 +10,34 @@
 npm install puppeteer-html-pdf
 ```
 
-## Signature
 ```js
-htmlPDF.create(content, options, callback)
+const htmlPDF = new PuppeteerHTMLPDF();
+```
+
+## Methods
+```js
+htmlPDF.setOptions(options)
+htmlPDF.getPage()
+htmlPDF.create(content, callback)
+htmlPDF.writeFile(pdfBuffer, filePath, callback)
+htmlPDF.readFile(filePath, encoding, callback)
+htmlPDF.setAutoCloseBrowser(flag)
+htmlPDF.closeBrowser()
 ```
 
 ## Usage
 ### Example 1
 ```js
-const fs = require('fs');
-const util = require('util');
+const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
 const hbs = require('handlebars');
-const htmlPDF = require('puppeteer-html-pdf');
-const writeFile = util.promisify(fs.writeFile);
-const readFile = util.promisify(fs.readFile);
 
-const pdfData = {
+const htmlPDF = new PuppeteerHTMLPDF();
+const options = {
+  format: 'A4'
+}
+htmlPDF.setOptions(options);
+
+const pdfData =  {
   invoiceItems: [
     { item: 'Website Design', amount: 5000 },
     { item: 'Hosting (3 months)', amount: 2000 },
@@ -40,51 +52,44 @@ const pdfData = {
   },
   baseUrl: 'https://ultimateakash.com'
 }
-
-const options = {
-  format: 'A4',
-  args: {
-    browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
-  }
-} 
-
-const html = await readFile(__dirname + '/sample.html','utf8');  
+const html = await htmlPDF.readFile(__dirname + '/sample.html','utf8');  
 const template = hbs.compile(html);
 const content = template(pdfData);
-
+  
 try {
-  const buffer = await htmlPDF.create(content, options);
-  await writeFile('sample.pdf', buffer);
+  const pdfBuffer = await htmlPDF.create(content); 
+  const filePath = `${__dirname}/sample.pdf`
+  await htmlPDF.writeFile(pdfBuffer, filePath);
 } catch (error) {
-  console.log('htmlPDF error', error);
+  console.log('PuppeteerHTMLPDF error', error);
 }
 ```
  
 ### Example 2
 ```js 
-const htmlPDF = require('puppeteer-html-pdf'); 
- 
+const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
+
+const htmlPDF = new PuppeteerHTMLPDF();
 const options = { 
   format: 'A4',
   path: `${__dirname}/sample.pdf`, // you can pass path to save the file
-  args: {
-    browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
-  }
 }
+htmlPDF.setOptions(options);
 
 const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
-
+  
 try {
-  await htmlPDF.create(content, options); 
+  await htmlPDF.create(content); 
 } catch (error) {
-  console.log('htmlPDF error', error);
+  console.log('PuppeteerHTMLPDF error', error);
 }
 ```
 
 ### Example 3
 ```js 
-const htmlPDF = require('puppeteer-html-pdf'); 
- 
+const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
+
+const htmlPDF = new PuppeteerHTMLPDF();
 const options = {  
   width: '219mm',
   height: '297mm', 
@@ -98,13 +103,44 @@ const options = {
     browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
   }
 }
+htmlPDF.setOptions(options);
 
 const content = 'https://www.google.com';
-
+  
 try {
-  await htmlPDF.create(content, options); 
+  await htmlPDF.create(content); 
 } catch (error) {
-  console.log('htmlPDF error', error);
+  console.log('PuppeteerHTMLPDF error', error);
+}
+```
+
+### Example 4
+```js 
+const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
+
+const htmlPDF = new PuppeteerHTMLPDF();
+const options = {
+  format: 'A4'
+}
+htmlPDF.setOptions(options); 
+
+const content1 = 'https://www.google.com'; 
+const content2 = 'https://www.yahoo.com'; 
+  
+try {
+  htmlPDF.setAutoCloseBrowser(false)
+  const pdfBuffer1 = await htmlPDF.create(content1); 
+  const filePath1 = `${__dirname}/google.pdf`
+  await htmlPDF.writeFile(pdfBuffer1, filePath1);
+
+  const pdfBuffer2 = await htmlPDF.create(content2); 
+  const filePath2 = `${__dirname}/yahoo.pdf`
+  await htmlPDF.writeFile(pdfBuffer2, filePath2);
+} catch (error) {
+  console.log('PuppeteerHTMLPDF error', error);
+}
+finally {
+  await htmlPDF.closeBrowser();
 }
 ```
 
@@ -130,6 +166,7 @@ try {
 | headless               | `optional` | boolean \| string                          | Sets Chromium launch mode.                                                                                                                                                                                                                                                                                                      |                                                                    `new`      |
 | args               | `optional` | array                          | Sets Chromium flags mode.                                                                                                                                                                                                                                                                                                      |                                                                    `['--no-sandbox', '--disable-setuid-sandbox']`      |
 | authorization               | `optional` | string                          | HTTP header to be sent with every request.                                                                                                                                                                                                                                                                                                 |                    |
+| browserWSEndpoint               | `optional` | string                          | WS Endpoint(`wss://chrome.browserless.io?token=YOUR_TOKEN`).                                                                                                                                                                                                                                                                                                 |                    |
 ### Format
 
 The sizes of each format are as follows:
