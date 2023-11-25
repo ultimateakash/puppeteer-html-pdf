@@ -1,14 +1,16 @@
 {
   "name": "puppeteer-html-pdf",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "HTML to PDF converter for Node.js",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "example": "examples",
+    "test": "tests",
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -44,5 +46,13 @@
     "lodash.has": "^4.5.2",
     "lodash.omit": "^4.5.0",
     "puppeteer": "^19.11.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.js"],
+    "testTimeout": 10000
   }
 }

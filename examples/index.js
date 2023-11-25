@@ -1,11 +1,14 @@
-const fs = require('fs');
-const util = require('util');
+const PuppeteerHTMLPDF = require('../lib');
 const hbs = require('handlebars');
-const htmlPDF = require('../lib');
-const writeFile = util.promisify(fs.writeFile);
-const readFile = util.promisify(fs.readFile);
 
 const createPDF = async () => {
+  const htmlPDF = new PuppeteerHTMLPDF();
+  const options = {
+    format: 'A4',
+    // path: `${__dirname}/sample.pdf` 
+  }
+  htmlPDF.setOptions(options);
+
   const pdfData =  {
     invoiceItems: [
       { item: 'Website Design', amount: 5000 },
@@ -21,25 +24,18 @@ const createPDF = async () => {
     },
     baseUrl: 'https://ultimateakash.com'
   }
-
-  const options = {
-    format: 'A4',
-    args: {
-      browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
-    }
-  }
-
   // const content = "<style> h1 {color:red;} </style> <h1>Welcome to puppeteer-html-pdf</h1>";
   // const content = 'https://www.google.com'; 
-  const html = await readFile(__dirname + '/sample.html','utf8');  
+  const html = await htmlPDF.readFile(__dirname + '/sample.html','utf8');  
   const template = hbs.compile(html);
   const content = template(pdfData);
     
   try {
-    const buffer = await htmlPDF.create(content, options); 
-    await writeFile('sample.pdf', buffer);
+    const pdfBuffer = await htmlPDF.create(content); 
+    const filePath = `${__dirname}/sample.pdf`
+    await htmlPDF.writeFile(pdfBuffer, filePath);
   } catch (error) {
-    console.log('htmlPDF error', error);
+    console.log('PuppeteerHTMLPDF error', error);
   }
 }
 
