@@ -99,9 +99,7 @@ const options = {
     top: '20px'
   },
   path: `${__dirname}/sample.pdf`, // you can pass path to save the file
-  args: {
-    browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
-  }
+  browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_TOKEN'
 }
 htmlPDF.setOptions(options);
 
