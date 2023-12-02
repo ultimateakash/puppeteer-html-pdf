@@ -1,14 +1,12 @@
 declare module 'puppeteer-html-pdf' {
-    import { Page } from 'puppeteer';
+  import { Page, PDFOptions } from 'puppeteer';
   
-    interface PuppeteerHTMLPDFOptions {
-      args?: string[];
-      headless?: boolean;
-      printBackground?: boolean;
-      authorization?: string;
-      browserWSEndpoint?: string;
-      // Add any additional options properties here
-    }
+  interface PuppeteerHTMLPDFOptions extends PDFOptions {
+    args?: string[];
+    headless?: boolean;
+    authorization?: string;
+    browserWSEndpoint?: string;
+  }
   
     class PuppeteerHTMLPDF {
       constructor();

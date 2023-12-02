@@ -32,10 +32,7 @@ const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
 const hbs = require('handlebars');
 
 const htmlPDF = new PuppeteerHTMLPDF();
-const options = {
-  format: 'A4'
-}
-htmlPDF.setOptions(options);
+htmlPDF.setOptions({ format: 'A4' });
 
 const pdfData =  {
   invoiceItems: [
@@ -117,10 +114,45 @@ try {
 const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
 
 const htmlPDF = new PuppeteerHTMLPDF();
-const options = {
-  format: 'A4'
+htmlPDF.setOptions({ format: 'A4' });
+htmlPDF.setAutoCloseBrowser(false)
+
+const urls = [
+  'https://www.google.com', 
+  'https://www.yahoo.com', 
+  'https://www.bing.com',
+  'https://www.yandex.com',
+  'https://www.duckduckgo.com',
+  'https://www.ask.com',
+  'https://www.aol.com',
+];
+try {
+  const pdfPromises = urls.map(async (url, index) => {
+
+    const pdfBuffer = await htmlPDF.create(url);
+
+    const filePath = `${__dirname}/PDF_${index + 1}.pdf`
+    await htmlPDF.writeFile(pdfBuffer, filePath);
+
+    console.log(`Generated PDF from ${url}`);
+  });
+
+  await Promise.all(pdfPromises);
+
+} catch (error) {
+  console.log('PuppeteerHTMLPDF error', error);
 }
-htmlPDF.setOptions(options); 
+finally {
+  await htmlPDF.closeBrowser();
+}
+```
+
+### Example 5
+```js 
+const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
+
+const htmlPDF = new PuppeteerHTMLPDF();
+htmlPDF.setOptions({ format: 'A4' }); 
 
 const content1 = 'https://www.google.com'; 
 const content2 = 'https://www.yahoo.com'; 
