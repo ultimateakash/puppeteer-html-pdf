@@ -9,6 +9,7 @@ example/node_modules
 build
 dist
 .rpt2_cache
+.cache
 
 # misc
 .DS_Store 
