@@ -3,7 +3,15 @@
 > HTML to PDF converter for Node.js
 
 [![NPM](https://img.shields.io/npm/v/puppeteer-html-pdf.svg)](https://www.npmjs.com/package/puppeteer-html-pdf) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Known Vulnerabilities](https://snyk.io/test/github/ultimateakash/puppeteer-html-pdf/badge.svg)](https://snyk.io/test/github/ultimateakash/puppeteer-html-pdf/badge.svg)
- 
+
+---
+## Versions
+
+| Node.js          | puppeteer-html-pdf |
+|------------------|:---------:|
+| >=15.0.0 |   v4.x   |
+|  <15.0.0 |   v3.x   |
+
 ## Installation
 
 ```sh
@@ -17,7 +25,6 @@ const htmlPDF = new PuppeteerHTMLPDF();
 ## Methods
 ```js
 htmlPDF.setOptions(options)
-htmlPDF.getPage()
 htmlPDF.create(content, callback)
 htmlPDF.writeFile(pdfBuffer, filePath, callback)
 htmlPDF.readFile(filePath, encoding, callback)
@@ -114,7 +121,7 @@ try {
 const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
 
 const htmlPDF = new PuppeteerHTMLPDF();
-htmlPDF.setOptions({ format: 'A4' });
+htmlPDF.setOptions({ format: 'A4', timeout: 60000 });
 htmlPDF.setAutoCloseBrowser(false)
 
 const urls = [
