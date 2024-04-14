@@ -52,7 +52,7 @@ const pdfData =  {
     transaction_id: 1234567,
     payment_method: 'Paypal',
     creation_date: '04-05-1993',
-    total_amount: 141.5,
+    total_amount: 8000,
   },
   baseUrl: 'https://ultimateakash.com'
 }
