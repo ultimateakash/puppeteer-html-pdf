@@ -5,7 +5,8 @@ const createPDF = async () => {
   const htmlPDF = new PuppeteerHTMLPDF();
   const options = {
     format: 'A4',
-    // path: `${__dirname}/sample.pdf` 
+    // path: `${__dirname}/sample.pdf`,
+    // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
   }
   htmlPDF.setOptions(options);
 
