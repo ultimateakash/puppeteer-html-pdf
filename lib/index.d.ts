@@ -6,6 +6,7 @@ declare module 'puppeteer-html-pdf' {
     headless?: boolean;
     authorization?: string;
     browserWSEndpoint?: string;
+    executablePath?: string;
   }
   
     class PuppeteerHTMLPDF {
