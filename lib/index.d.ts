@@ -44,6 +44,8 @@ declare module 'puppeteer-html-pdf' {
       generatePDF(page: Page): Promise<Buffer>;
   
       closeBrowser(): Promise<void>;
+
+      closeBrowserTabs(): Promise<void>;
     }
   
     export = PuppeteerHTMLPDF;

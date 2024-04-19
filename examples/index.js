@@ -6,6 +6,7 @@ const createPDF = async () => {
   const options = {
     format: 'A4',
     // path: `${__dirname}/sample.pdf`,
+    // browserWSEndpoint: 'ws://127.0.0.1:9229/devtools/browser/1d27fb70-14e5-4f90-9a41-d33db6613a88',
     // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
   }
   htmlPDF.setOptions(options);

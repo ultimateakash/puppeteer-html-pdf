@@ -30,6 +30,7 @@ htmlPDF.writeFile(pdfBuffer, filePath, callback)
 htmlPDF.readFile(filePath, encoding, callback)
 htmlPDF.setAutoCloseBrowser(flag)
 htmlPDF.closeBrowser()
+htmlPDF.closeBrowserTabs()
 ```
 
 ## Usage

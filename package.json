@@ -40,7 +40,7 @@
   "dependencies": {
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
-    "puppeteer": "^22.6.2"
+    "puppeteer": "^22.6.5"
   },
   "devDependencies": {
     "jest": "^29.7.0"
