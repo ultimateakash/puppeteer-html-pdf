@@ -38,8 +38,6 @@
   },
   "homepage": "https://github.com/ultimateakash/puppeteer-html-pdf#readme",
   "dependencies": {
-    "is-url": "^1.2.4",
-    "lodash": "^4.17.21",
     "puppeteer": "^22.6.5"
   },
   "devDependencies": {
