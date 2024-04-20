@@ -7,6 +7,7 @@ declare module 'puppeteer-html-pdf' {
     authorization?: string;
     browserWSEndpoint?: string;
     executablePath?: string;
+    headers?: { [key: string]: string };
   }
   
     class PuppeteerHTMLPDF {
