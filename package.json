@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-html-pdf",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "description": "HTML to PDF converter for Node.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/ultimateakash/puppeteer-html-pdf#readme",
   "dependencies": {
-    "puppeteer": "^22.6.5"
+    "puppeteer": "^22.7.1"
   },
   "devDependencies": {
     "jest": "^29.7.0"
