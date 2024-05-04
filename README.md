@@ -27,6 +27,7 @@ const htmlPDF = new PuppeteerHTMLPDF();
 
 ```js
 htmlPDF.setOptions(options);
+htmlPDF.getPage();
 htmlPDF.create(content, callback);
 htmlPDF.writeFile(pdfBuffer, filePath, callback);
 htmlPDF.readFile(filePath, encoding, callback);
